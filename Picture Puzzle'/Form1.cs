@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Dynamic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,7 +20,8 @@ namespace Picture_Puzzle_
         Image[] imagesSecond = { Resources.dog_1b, Resources.dog_2b, Resources.dog_3b, Resources.dog_4b };
         Image[] imagesThird = { Resources.dog_1c, Resources.dog_2c, Resources.dog_3c, Resources.dog_4c };
         Image[] imagesFourth = { Resources.dog_1d, Resources.dog_2d, Resources.dog_3d, Resources.dog_4d };
-        //Four arrays and integrals working "together", Ex when first = 3, the first array will be on index 4, containing the picture dog_4a.
+        //Four arrays and integrals "working together", e.g when first = 3, the first array will be on index 4, containing the picture dog_4a.
+        Random rng = new Random();
         int first = 0;
         int second = 1;
         int third = 2;
@@ -27,6 +29,7 @@ namespace Picture_Puzzle_
         public Form1()
         {
             InitializeComponent();
+            
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -57,8 +60,8 @@ namespace Picture_Puzzle_
                
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            if (pictureBox2.Image == imagesSecond[fourth])
-            {
+            if (pictureBox2.Image == imagesSecond[fourth])//The only difference in code during the rest of the project is just
+            {                                             // that the number of pictureBox, as well as array, increases.  
                 pictureBox2.Image = imagesSecond[first];
             }
 
@@ -123,6 +126,11 @@ namespace Picture_Puzzle_
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            first = rng.Next(0, 3);
+            second = rng.Next(0, 3);
+            third = rng.Next(0, 3);
+            fourth = rng.Next(0, 3);
+            //Randomizes the pictures displayed in the puzzle on starting the project.
             pictureBox1.Image = imagesFirst[first];
             pictureBox2.Image = imagesSecond[second];
             pictureBox3.Image = imagesThird[third];
